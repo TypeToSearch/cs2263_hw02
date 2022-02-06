@@ -5,7 +5,13 @@ package edu.isu.cs2263.hw01;
 
 import org.apache.commons.cli.*;
 
+import java.io.FileNotFoundException;
+
 public class App {
+    /**
+     * Main class for handling execution of the application with command line arguments
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         // Make Options
         Option help = new Option("h", "help", false, "print usage message");
@@ -36,11 +42,19 @@ public class App {
                 formatter.printHelp("eval [options]", header, options, footer);
             }
             else if (cmd.hasOption("b")) {
-                System.out.println("Batch value: " + cmd.getOptionValue("b"));
+                Equator equator = new Equator(new BatchInput(cmd.getOptionValue("b")), new TerminalOutput(true));
+                equator.solve();
             }
             else if (cmd.hasOption("o")) {
                 System.out.println("Output value: " + cmd.getOptionValue("o"));
             }
+            else { // In the case of no options
+                Equator equator = new Equator(new TerminalInput(), new TerminalOutput(false));
+                equator.solve();
+            }
+        }
+        catch (FileNotFoundException exp) {
+            System.err.println(exp.getMessage() + " Please provide an existing file");
         }
         catch (ParseException exp) {
             System.err.println(exp.getMessage());
