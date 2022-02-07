@@ -1,4 +1,4 @@
-# cs2263_hw01
+# cs2263_hw02
 This is a repository for CS2263 homework 02.
 
 ## Description
