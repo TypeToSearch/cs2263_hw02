@@ -1,0 +1,7 @@
+5 + 5
+	-> 10
+4 * 4 + 2
+	-> 18
+(Invalid mathematical expression)
+4 * 7
+	-> 28
