@@ -6,16 +6,16 @@ package edu.isu.cs2263.hw01;
  */
 public class Equator {
     private final Input input;
-    private final Output output;
+    private final Output[] outputs;
 
     /**
      * Constructs an Equator object with the preferred input and output
      * @param in The preferred input object
-     * @param out The preferred output object
+     * @param outs An array of type Output to use as the output types
      */
-    public Equator(Input in, Output out) {
+    public Equator(Input in, Output[] outs) {
         input = in;
-        output = out;
+        outputs = outs;
     }
 
     /**
@@ -47,11 +47,18 @@ public class Equator {
     public void solve() {
         while (input.isReading()) {
             for (var equation : input.read()) {
+                int answer = 0;
                 try {
-                    output.output(equation, equate(equation));
+                    answer = equate(equation);
                 }
                 catch (Exception exp) {
-                    System.out.println("(Invalid mathematical expression)");
+                    for (var out : outputs) {
+                        out.invalid();
+                    }
+                    continue;
+                }
+                for (var out : outputs) {
+                    out.output(equation, answer);
                 }
             }
         }

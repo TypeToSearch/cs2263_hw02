@@ -11,4 +11,9 @@ public interface Output {
      * @param equation The expression evaluated
      */
     public void output(String equation, int answer);
+
+    /**
+     * Outputs a message that states that an expression was invalid
+     */
+    public void invalid();
 }
